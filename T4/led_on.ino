@@ -1,9 +1,6 @@
-
-
-
-void led0(){
+void led_on(){
   
-  switch (stateLed0){
+  switch (stateLED_on){
     
     //////////////////
     // E0 - LED OFF //
@@ -11,58 +8,23 @@ void led0(){
     
     case 0:
 
-      digitalWrite(LED, LOW);       // El pin del led en OFF
+      digitalWrite(LED_on, LOW);      // El pin del LED_on en OFF
 
-      if ( flagB0 ){                //
-        stateLed0 = 1;              //
+      if ( flagStart ){               // Si se inicializan correctamente todos los sistemas
+        stateLED_on = 1;              // pasa al estado 1
       }
-      else if ( flagB1 ){           //
-        stateLed0 = 3;              //
-      }
-      else{                         //
-        stateLed0 = 0;              //
+      else{                           // Si no, 
+        stateLED_on = 0;              // se mantiene en estado 0
       }
     break;
 
     ///////////////////////
-    // E1 - LED ON 200MS //
+    // E1 - LED ON //
     ///////////////////////
 
     case 1:
-      digitalWrite(LED, HIGH);        //
-      countLed0++;                    //
-
-      if ( flagB0 &&(countLed0 > millis200) ){        //
-        stateLed0 = 2;                              //
-      }
-      else if( !flagB0 && (countLed0 > millis200) ){   //
-        stateLed0 = 0;                              //   
-      }
-      else{                                         //
-        stateLed0 = 1;                              //
-      }
-
-    break;
-
-    ////////////////////////
-    // E2 - RESET COUNTER //
-    ////////////////////////
-
-    case 2:
-      digitalWrite(LED, HIGH);  //
-      countLed0 = 0;            //
+      digitalWrite(LED_on, HIGH);     // El pin del LED_on en ON hasta que algo haga que el sistema se apague
       
-      stateLed0 = 1;            //
     break;
 
-    case 3:
-    break;
-
-    case 4:
-    break;
-
-    default:
-    break;
-  
-  }
 }
