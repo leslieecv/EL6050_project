@@ -1,5 +1,6 @@
 #include <TFmini.h>
 #include <EEPROM.h>
+#include <avr/sleep.h>
 
 int LED_on = 42;                    ///< pin de hardware de LED de encendido
 int LED_red = 43;                   ///< pin de hardware de LED de red
