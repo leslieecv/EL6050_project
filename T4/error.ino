@@ -9,6 +9,8 @@ void error(byte error_type, byte time_value) {      //
     readValue = EEPROM.read(pointer);               // Se actualiza el valor de readValue
   }                                                 // Cuando sale del ciclo significa que encontro el primer espacio de memoria libre (de 4096 direcciones)
   EEPROM.write(pointer, error_type);                // Escribe el tipo de error en el espacio vacio encontrado
+  EEPROM.commit();                                  // Confirmar la escritura
   EEPROM.write(pointer + 1, time_value);            // Agrega la hora o fecha al siguiente espacio de memoria
+  EEPROM.commit();                                  // Confirmar la escritura
 }
   
