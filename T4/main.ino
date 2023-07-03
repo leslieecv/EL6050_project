@@ -1,6 +1,5 @@
 #include <TFmini.h>
 
-
 int LED_on = 42;                    ///< pin de hardware de LED de encendido
 int LED_red = 43;                   ///< pin de hardware de LED de red
 int LED_dist = 44;                  ///< pin de hardware de LED del estado de la distancia
@@ -19,6 +18,8 @@ int TRS_A = 37;                     ///< pin de hardware del transductor C
 
 int LRW_TX = 0;                     ///< pin de hardware del transmisor LoRaWAN
 int LRW_RX = 1;                     ///< pin de hardware del receptor LoRaWAN
+
+string msg[23];                     // Mensaje a enviar mediante LoRaWAN
 
 // Definición de los estados
 enum Estados { //Se define una enumeración para los estados
