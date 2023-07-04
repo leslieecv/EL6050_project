@@ -17,8 +17,8 @@ int LIDAR2_TX = 17;                 ///< pin de hardware del transmisor del LiDA
 int LIDAR2_RX = 16;                 ///< pin de hardware del receptor del LiDAR 2
 
 int TRS_A = 35;                     ///< pin de hardware del transductor A
-int TRS_A = 36;                     ///< pin de hardware del transductor B
-int TRS_A = 37;                     ///< pin de hardware del transductor C
+int TRS_B = 36;                     ///< pin de hardware del transductor B
+int TRS_C = 37;                     ///< pin de hardware del transductor C
 
 int LRW_TX = 0;                     ///< pin de hardware del transmisor LoRaWAN
 int LRW_RX = 1;                     ///< pin de hardware del receptor LoRaWAN
@@ -29,11 +29,8 @@ string msg[23];                     // Mensaje a enviar mediante LoRaWAN
 enum Estados { //Se define una enumeración para los estados
   Energia,
   Lidar,
-  Guardar1,
   Trans,
-  Guardar2,
   Lora,
-  Guardar3,
   Error
 };
 
@@ -73,39 +70,16 @@ void loop() {
       //////////////////////
       // E2 - ESTADO LIDAR //
       //////////////////////
-      // Código para el estado Lidar
-      // ...
-      // Cambio de estado
-      estadoActual = Guardar1;
-      break;
-
-    case Guardar1:
-      ////////////////////////////
-      // E3 - ESTADO GUARDAR 1 ///
-      ////////////////////////////
-      // Código para el estado Guardar1
-      // ...
-      // Cambio de estado
+      getLevel();
       estadoActual = Trans;
       break;
+
 
     case Trans:
       ///////////////////////
       // E4 - ESTADO TRANS //
       ///////////////////////
-      // Código para el estado Trans
-      // ...
-      // Cambio de estado
-      estadoActual = Guardar2;
-      break;
-
-    case Guardar2:
-      ///////////////////////////
-      // E5 - ESTADO GUARDAR 2 //
-      ///////////////////////////
-      // Código para el estado Guardar2
-      // ...
-      // Cambio de estado
+      getCurrent();
       estadoActual = Lora;
       break;
 
@@ -119,15 +93,6 @@ void loop() {
       estadoActual = Guardar3;
       break;
 
-    case Guardar3:
-      ///////////////////////////
-      // E7 - ESTADO GUARDAR 3 //
-      ///////////////////////////
-      // Código para el estado Guardar3
-      // ...
-      // Cambio de estado
-      estadoActual = Energia;
-      break;
 
     case Error:
       ///////////////////////
