@@ -17,10 +17,11 @@ void getLevel(){
         // E0 - ESPERANDO //
         ////////////////////
 
-        dist1 = 0;                                  // Se reinicia el valor de dist1
-        dist2 = 0;                                  // Se reinicia el valor de dist2
+        
         case 0: 
-            errorCount = 0;                         
+            dist1 = 0;                              // Se reinicia el valor de dist1
+            dist2 = 0;                              // Se reinicia el valor de dist2
+            errorCount = 0;                         // Se reinicia el contador de errores
             if ( flagCheckStatus ){                 // Si se recibe la orden de medir
                 stateLidar = 1;                     // se pasa al estado 1
             }
@@ -80,7 +81,7 @@ void getLevel(){
 
         case 3: 
             dist = (dist1 + dist2) / 2;             // Se actualiza el nivel del estanque
-            level = dist - sensorLevel;              // Se cambia la referencia de altura a la base
+            level = dist - sensorLevel;             // Se cambia la referencia de altura a la base
             stateLidar = 4;                         // Se pasa a estado 4
         break;
 
@@ -89,11 +90,16 @@ void getLevel(){
         ////////////////////////////
 
         case 4:
-            flagErrorLidar = 0;                 // Se desactiva la flag de error en los LiDAR 
+            flagErrorLidar = 0;                 // Se desactiva la flag de error en los LiDAR
+            flagCheckLidar = 1;                 // Se activa la flag de revision de estado de los LiDAR
             led_dist();                         // Se actualiza el estado del LED_dist
             msg += 'diesel';                    // Se agregan datos al mensaje
             msg += level;                       // Se agrega nivel de estanque medido al mensaje
+            stateLidar = 0;                     // Se pasa al estado 0
             
+            
+            stateLidar = 0;
+             
             stateLidar = 0;
         break;
 
@@ -104,9 +110,8 @@ void getLevel(){
         case 5: 
             flagErrorLidar = 1;                     // Se activa la flag de error en los LiDAR
             led_dist();                             // Se actualiza el estado del LED_dist
-            msg += 'ErrorLidar:';                   // Agregar texto de error al mensaje a enviar
-            msg += dist1;
-            msg += dist2;
+            error(2)                                // Se guarda el error para futura revisión
+            stateLidar = 0;                         // Se pasa al estado 0
         break;
 
         default:

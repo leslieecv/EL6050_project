@@ -1,4 +1,5 @@
 #include <EEPROM.h>
+#include <avr/io.h>
 
 void error(byte error_type, byte time_value) {      //
   EEPROM.begin();                                   // Inicializar la comunicación con la memoria EEPROM
@@ -12,5 +13,8 @@ void error(byte error_type, byte time_value) {      //
   EEPROM.commit();                                  // Confirmar la escritura
   EEPROM.write(pointer + 1, time_value);            // Agrega la hora o fecha al siguiente espacio de memoria
   EEPROM.commit();                                  // Confirmar la escritura
+  if (error_type == 4) {                            // Si el error es en el estado 4 (Lora) se reinicia el dispositivo
+    asm volatile("jmp 0");                          // Reiniciar el dispositivo
+  }
 }
   
