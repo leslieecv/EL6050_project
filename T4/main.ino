@@ -1,6 +1,7 @@
 #include <TFmini.h>
 #include <EEPROM.h>
 #include <LowPower.h>
+#include <avr/io.h>
 
 
 int LED_on = 42;                    ///< pin de hardware de LED de encendido
