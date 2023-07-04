@@ -7,7 +7,7 @@ uint16_t dist1 = 0;                 // Distancia que mide el LiDAR 1
 uint16_t dist2 = 0;                 // Distancia que mide el LiDAR 2
 
 int stateLidar = 0;                 // Estado del LiDAR
-
+byte error_type = 2;                // Código del error de los sensores Lidar en caso de que fallen
 int sensorLevel = 15;               // Altura en metros a la que están los sensores respecto a la base del estanque
 
 void getLevel(){
