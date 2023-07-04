@@ -3,12 +3,14 @@
 TFMini lidar1;                      // Inicializacion de LiDAR 1
 TFMini lidar2;                      // Inicializacion del LiDAR 2
 
+int stateLidar = 0;                 // Estado del LiDAR
+byte error_type = 2;                // Código del error de los sensores Lidar en caso de que fallen
+
 uint16_t dist1 = 0;                 // Distancia que mide el LiDAR 1
 uint16_t dist2 = 0;                 // Distancia que mide el LiDAR 2
 
-int stateLidar = 0;                 // Estado del LiDAR
-byte error_type = 2;                // Código del error de los sensores Lidar en caso de que fallen
 int sensorLevel = 15;               // Altura en metros a la que están los sensores respecto a la base del estanque
+int errorCount = 0;                 // Contador de errores
 
 void getLevel(){
     switch (stateLidar){
@@ -96,11 +98,6 @@ void getLevel(){
             msg += 'diesel';                    // Se agregan datos al mensaje
             msg += level;                       // Se agrega nivel de estanque medido al mensaje
             stateLidar = 0;                     // Se pasa al estado 0
-            
-            
-            stateLidar = 0;
-             
-            stateLidar = 0;
         break;
 
         /////////////////////////////
@@ -110,7 +107,7 @@ void getLevel(){
         case 5: 
             flagErrorLidar = 1;                     // Se activa la flag de error en los LiDAR
             led_dist();                             // Se actualiza el estado del LED_dist
-            error(2)                                // Se guarda el error para futura revisión
+            error(error_type)                       // Se guarda el error para futura revisión
             stateLidar = 0;                         // Se pasa al estado 0
         break;
 
