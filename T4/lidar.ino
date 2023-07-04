@@ -91,20 +91,10 @@ void getLevel(){
         case 4:
             flagErrorLidar = 0;                 // Se desactiva la flag de error en los LiDAR 
             led_dist();                         // Se actualiza el estado del LED_dist
-            msg += 'diesel';                     // Se agregan datos al mensaje
-
-            if ( level > 14 ){                  // Si el estanque tiene más de 14m de petróleo
-                msg += 'ok'
-            }
-            else if ( level>12 && level<14 ){   // Si el estanque tiene más de 12m de petróleo
-                msg += '';
-            }
-            else if ( level>8 && level<10 ){    // Si el estanque tiene más de 10m de petróleo
-                msg += '';
-            }
-            else if ( level<8 ){                // Si el estanque tiene menos de 8m de petróleo
-                msg += 'sos';
-            }
+            msg += 'diesel';                    // Se agregan datos al mensaje
+            msg += level;                       // Se agrega nivel de estanque medido al mensaje
+            
+            stateLidar = 0;
         break;
 
         /////////////////////////////
