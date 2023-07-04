@@ -25,9 +25,11 @@ int LRW_RX = 1;                     ///< pin de hardware del receptor LoRaWAN
 
 string msg[23];                     // Mensaje a enviar mediante LoRaWAN
 
+byte error_type = 0;
+
 // Definición de los estados
 enum Estados { //Se define una enumeración para los estados
-  Energia,
+  Iniciar,
   Lidar,
   Trans,
   Lora,
@@ -46,30 +48,29 @@ void pin_setup(){
     pinMode(LED_trsc, OUTPUT);
 }
 
-
 void setup() {
   // Inicialización del programa
-  estadoActual = Energia;
+  estadoActual = Iniciar;
   pin_setup();
 }
 
 void loop() {
   // Lógica de los estados
   switch (estadoActual) {
-    case Energia:
-      ///////////////////////
-      // E1 - ESTADO ENERGIA //
-      ///////////////////////
-      // Código para el estado Energia
-      // ...
-      // Cambio de estado
+    case Iniciar:
+      /////////////////////////
+      // E1 - ESTADO INICIAR //
+      /////////////////////////
+
+      led_on();
       estadoActual = Lidar;
       break;
 
     case Lidar:
-      //////////////////////
+      ///////////////////////
       // E2 - ESTADO LIDAR //
-      //////////////////////
+      ///////////////////////
+
       getLevel();
       estadoActual = Trans;
       break;
@@ -79,6 +80,7 @@ void loop() {
       ///////////////////////
       // E4 - ESTADO TRANS //
       ///////////////////////
+
       getCurrent();
       estadoActual = Lora;
       break;
@@ -87,9 +89,8 @@ void loop() {
       //////////////////////
       // E6 - ESTADO LORA //
       //////////////////////
-      // Código para el estado Lora
-      // ...
-      // Cambio de estado
+
+    
       estadoActual = Guardar3;
       break;
 
@@ -98,10 +99,9 @@ void loop() {
       ///////////////////////
       // E8 - ESTADO ERROR //
       ///////////////////////
-      // Código para el estado Error
-      // ...
-      // Posible manejo del error
-      estadoActual = Energia;
+      
+      error(error_type, time)
+      estadoActual = Iniciar;
       break;
   }
 }

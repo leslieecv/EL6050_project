@@ -112,7 +112,7 @@ void getLevel(){
         break;
 
         default:
-            stateLidar = 0;
+            stateLidar = 0;                         // Se define en estado 0
         break;
     } 
 }

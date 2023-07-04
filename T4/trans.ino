@@ -54,8 +54,7 @@ void getCurrent(){
         /////////////////////////
 
         case 2: 
-            dist = (dist1 + dist2) / 2;             // Se actualiza el nivel del estanque
-            level = dist - sensorLevel;             // Se cambia la referencia de altura a la base
+                                                    // Se realiza un ajuste entre la lectura analoga y corriente en la red
             stateTrans = 3;                         // Se pasa a estado 4
         break;
 
@@ -64,11 +63,10 @@ void getCurrent(){
         ////////////////////////////
 
         case 3:
-            flagErrorLidar = 0;                 // Se desactiva la flag de error en los LiDAR
-            flagCheckLidar = 1;                 // Se activa la flag de revision de estado de los LiDAR
-            led_dist();                         // Se actualiza el estado del LED_dist
-            msg += 'diesel';                    // Se agregan datos al mensaje
-            msg += level;                       // Se agrega nivel de estanque medido al mensaje
+            flagErrorTrans = 0;                 // Se desactiva la flag de error en los sensores de corriente
+            flagCheckTrans = 1;                 // Se activa la flag de revision de estado de los LiDAR
+            led_trans();                        // Se actualiza el estado del LED_trans
+                                                // Se agregan los datos al mensaje a enviar por LoRaWAN
             stateTrans = 0;                     // Se pasa al estado 0
         break;
 
@@ -79,12 +77,12 @@ void getCurrent(){
         case 4: 
             flagErrorTrans = 1;                     // Se activa la flag de error en los LiDAR
             led_trans();                            // Se actualiza el estado del LED_trans
-            error(3)                                // Se guarda el error para futura revisión
+            error(error_type)                       // Se guarda el error para futura revisión
             stateTrans = 0;                         // Se pasa al estado 0
         break;
 
         default:
-            stateLidar = 0;
+            stateTrans = 0;                         // Se define en estado 0
         break;
     } 
 }

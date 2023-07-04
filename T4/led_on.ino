@@ -1,3 +1,4 @@
+
 void led_on(){
   
   switch (stateLED_on){
@@ -26,5 +27,10 @@ void led_on(){
       digitalWrite(LED_on, HIGH);     // El pin del LED_on en ON hasta que algo haga que el sistema se apague
       
     break;
+
+    default:
+      stateLED_on = 0;                // Se define en estado 0
+    break;
+
 
 }
