@@ -33,6 +33,7 @@ enum Estados { //Se define una enumeración para los estados
   Lidar,
   Trans,
   Lora,
+  SleepTime,
   Error
 };
 
@@ -78,7 +79,7 @@ void loop() {
 
     case Trans:
       ///////////////////////
-      // E4 - ESTADO TRANS //
+      // E3 - ESTADO TRANS //
       ///////////////////////
 
       getCurrent();
@@ -87,21 +88,21 @@ void loop() {
 
     case Lora:
       //////////////////////
-      // E6 - ESTADO LORA //
+      // E4 - ESTADO LORA //
       //////////////////////
 
     
-      estadoActual = Guardar3;
+      estadoActual = SleepTime;
       break;
 
 
-    case Error:
+    case SleepTime:
       ///////////////////////
-      // E8 - ESTADO ERROR //
+      // E5 - ESTADO Time  //
       ///////////////////////
       
-      error(error_type, time)
-      estadoActual = Iniciar;
+      SleepTime()
+      estadoActual = Lidar;
       break;
   }
 }
